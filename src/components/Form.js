@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AhiInput } from '@azaleahealth/azalea-kit-ui/dist/react';
+import { AhiInput, onAhiChange } from '@azaleahealth/azalea-kit-ui/dist/react';
 
 const Form = () => {
   const initialState = {
@@ -8,6 +8,7 @@ const Form = () => {
     test: ''
   };
   const [formData, setFormData] = useState(initialState);
+  const [value, setValue] = useState("");
 
   //handle form change
   const handleChange = e => {
@@ -16,27 +17,39 @@ const Form = () => {
       ...fData,
       [name]: value
     }));
+    console.log(formData);
   };
-  console.log(formData);
+  const handle = e=> {
+    setValue(e.target.value)
+    console.log('value--->>', value)
 
+
+  }
+console.log('value--->>', value)
   return (
     <form>
-      <input type="text" name="test" value={formData.test} placeholder="test" onChange={handleChange} />
-      <AhiInput
-        type="text"
-        label="UserName"
-        name="username"
-        placeholder="UserName"
-        value={formData.username}
-        onChange={handleChange}
+      <input type="text" 
+      name="test" 
+      value={formData.test} 
+      placeholder="test" 
+      onChange={handleChange} 
       />
 
       <AhiInput
+        type="text"
+        name="userName"
+        label="UserName"
+        placeholder="userName"
+        value={formData.username}
+        onAhiChange={handleChange}
+      />
+
+      <AhiInput
+        type="password"
+        name="password"
         value={formData.password}
         label="Password"
-        name="password"
         placeholder="Password"
-        type="password"
         onChange={handleChange}
       />
     </form>
